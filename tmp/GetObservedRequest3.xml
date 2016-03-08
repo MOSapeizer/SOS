@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetObservation service="SOS" version="2.0.0" xmlns="http://www.opengis.net/sos/2.0"  xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:gml="http://www.opengis.net/gml/32" xmlns:ogc="http://www.opengis.net/ogc" xmlns:om="http://www.opengis.net/om/1.0" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd">
+	<offering>鳳義坑</offering>
+	<observedProperty>urn:ogc:def:phenomenon:OGC:1.0.30:rainfall_1day</observedProperty>
+	<temporalFilter>
+		<fes:After>
+			<fes:ValueReference>phenomenonTime_28</fes:ValueReference>
+			<gml:TimePeriod gml:id="phenomenonTime">
+				<gml:beginPosition>2016-03-03T04:00:00.000Z</gml:beginPosition>
+				<gml:endPosition>2016-03-04T04:00:00.000Z</gml:endPosition>
+			</gml:TimePeriod>
+		</fes:After>
+	</temporalFilter>
+	<responseFormat>application/json</responseFormat>
+</GetObservation>
