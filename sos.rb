@@ -22,20 +22,27 @@ class SOS
 	def initialize(url, args={})
 		# request to http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service
 		@request = XmlRequest.new(url)
-		@capabilities, @observations, @allowedValue = nil
+		@capabilities = getCapabilities
+		@observations = nil
+	end
 
+	def allowedValue
+		@allowedValue ||= checkAllowedValues
 	end
 	
 	def getCapabilities(query={})
-		gc = SOSHelper::GetCapability.new(request: @request)
-		@capabilities = gc.send
-		@allowedValues = gc.checkAllowedValues
+		@gc = SOSHelper::GetCapability.new(request: @request)
+		@capabilities = @gc.send
 	end
 
-	def getObservations(condition={})
+	def checkAllowedValues
+		@gc.checkAllowedValues
+	end
+
+	def getObservations(condition={}, &block)
 		go = SOSHelper::GetObservation.new(request: @request)
 		go.filter(condition)
-		@observations = go.send()
+		@observations = go.send(&block)
 	end
 
 	def offering
@@ -43,3 +50,8 @@ class SOS
 	end
 	
 end
+
+s = SOS.new("http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service")
+# p s.allowedValue
+
+p s.getObservations

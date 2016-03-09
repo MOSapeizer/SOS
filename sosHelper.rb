@@ -1,4 +1,5 @@
 require 'nokogiri'
+require_relative 'factory'
 require 'set'
 
 module SOSHelper
@@ -31,7 +32,8 @@ module SOSHelper
 			@capabilities = request.get(query) { |str| next Nokogiri::XML(str) }
 		end
 
-		def checkAllowedValues
+		def checkAllowedValues(capabilities=nil)
+
 			@allowedValue = check Relics
 		end
 
@@ -89,56 +91,40 @@ module SOSHelper
 		def initialize(args={})
 			@request = args[:request]
 			# @capabilities = args[:capabilities]
-			@condition = {}
 			@xml = ObservationRequest.dup
 		end
 
 		def send(body=nil)
-			raise RuntimeError, 'Need to set request' if request.nil?
-			body = transform @condition if body.nil?
+			raise RuntimeError, 'Need to set request' if @request.nil?
+			body = condition.transform if body.nil?
 			@request.post(body) { |res| next res }
 		end
 
+		# filter() =>  no argument to return @condtion
+		# filter({:condition => "value"}) =>  with result to extend the filter
 		def filter(custom={})
 			raise ArgumentError, 'Filters need to be hash' unless custom.is_a? Hash
-			return @condition if custom == {}
-			custom = uniform custom
-			@condition.merge! custom do |key, origin, custom|
-				origin.merge custom.to_set
-			end
+			return condition if custom == {}
+
+			condition.merge! custom
 			self
 		end
 
-		def uniform(custom)
-			custom.each do |k, v| 
-				custom[k] = [v].to_set unless v.is_a? Array 
-				custom[k] = v.to_set unless v.is_a? Set
-			end
+		def inspect
+			"<GetObservation 0x#{self.__id__} @condition= #{condition}>"
 		end
 
-		def transform(condition=nil)
-			condition ||= @condition.dup
-			condition.each do |key, value|
-				tag = Nokogiri::XML::Node.new(key.to_s, @xml)
-				tag.content = value
-				@xml.root.add_child tag
-			end
-
-			@xml.to_xml
+		def condition
+			@condition ||= Factory.new()
 		end
 
 	end
-
-	# private
-
-	# def sampling(name)
-	# 	h = XmlRequest.new()
-	# 	h.post(xml) do |body|
-	# 		f = File.new('tmp/#{name}.json', 'w')
-	# 		f.write(body)
-	# 		f.close
-	# 	end	
-	# end	
 end
+
+o = SOSHelper::GetObservation.new
+c = o.filter({:procedure => "123"}).filter({:procedure => "344324"})
+p c
+
+# p o.uniform({ :procedure => "123"})
 
 

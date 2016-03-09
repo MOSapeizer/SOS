@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GetObservation service="SOS" version="2.0.0" xmlns="http://www.opengis.net/sos/2.0"  xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:gml="http://www.opengis.net/gml/32" xmlns:ogc="http://www.opengis.net/ogc" xmlns:om="http://www.opengis.net/om/1.0" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd">
-	<procedure>urn:ogc:object:feature:Sensor:SWCB:sensor鳳義坑</procedure>
-	<offering>鳳義坑</offering>
-	<observedProperty>urn:ogc:def:phenomenon:OGC:1.0.30:rainfall_1day</observedProperty>
-
-	<responseFormat>application/json</responseFormat>
-</GetObservation>
+<sos:GetObservation
+    xmlns:sos="http://www.opengis.net/sos/2.0"
+    xmlns:fes="http://www.opengis.net/fes/2.0"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+    xmlns:swe="http://www.opengis.net/swe/2.0"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:swes="http://www.opengis.net/swes/2.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="SOS" version="2.0.0" xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd">
+    
+    <sos:offering>鳳義坑</sos:offering>
+    <!-- optional, multiple values possible -->
+    <sos:observedProperty>urn:ogc:def:phenomenon:OGC:1.0.30:rainfall_1day</sos:observedProperty>
+    <!-- optional -->
+    <sos:temporalFilter>
+        <fes:During>
+            <fes:ValueReference>phenomenonTime</fes:ValueReference>
+            <gml:TimePeriod gml:id="tp_1">
+                <gml:beginPosition>2016-03-07T19:20:00.000Z</gml:beginPosition>
+                <gml:endPosition>2016-03-09T04:00:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+        </fes:During>
+    </sos:temporalFilter>
+    
+    <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+</sos:GetObservation>
