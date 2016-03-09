@@ -1,20 +1,21 @@
 require 'nokogiri'
-require_relative 'factory'
 require 'set'
+require_relative 'factory'
+require_relative 'boss'
+
 
 module SOSHelper
-
 	Urls = ["http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service",
 			  "http://cgis.csrsr.ncu.edu.tw:8080/epa-sos/service",
 			  "http://cgis.csrsr.ncu.edu.tw:8080/epa-aqx-sos/service"].freeze
 
 	Relics = ["offering","observedProperty",
 	     "featureOfInterest",
-		 "procedure", "responseFormat",
-		 "spatialFilter", "temporalFilter"].freeze
+		 "procedure", "spatialFilter", 
+		 "temporalFilter", "responseFormat"].freeze
 
 
-	ObservationRequest = File.open('request/getObservation.xml') { |f| Nokogiri::XML(f)  }
+	ObservationRequest = File.open('request/getObservation.xml') { |f| Nokogiri::XML(f)  }.freeze
 
 	class GetCapability
 
@@ -121,11 +122,10 @@ module SOSHelper
 	end
 end
 
-o = SOSHelper::GetObservation.new
-c = o.filter({:procedure => "123"}).filter({:procedure => "344324"})
+# o = SOSHelper::GetObservation.new
+# c = o.filter({:procedure => "123"}).filter({:procedure => "344324"})
 # p c.condition.transform(c.condition)
-p c.condition.transform(SOSHelper::ObservationRequest.dup)
-
+# p c.condition.transform(SOSHelper::ObservationRequest.dup)
 # p o.uniform({ :procedure => "123"})
-
+p SOSHelper::ObservationRequest.frozen?
 

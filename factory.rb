@@ -1,6 +1,6 @@
 class Factory < Hash
 	attr_reader :condition
-	def initialize(custom={}, boss=nil)
+	def initialize(custom={}, base=nil)
 		@condition = uniform custom
 	end
 
@@ -14,13 +14,13 @@ class Factory < Hash
 	# need fix to check
 	def transform(boss, obj=nil)
 		conditions = obj || condition
-		checkBehaviorOf(conditions).each do |key, value|
-			tag = Nokogiri::XML::Node.new(key.to_s, boss)
-			tag.content = value
-			boss.root.add_child tag
+		checkBehaviorOf(conditions).each do |employee, tasks|
+			project = Boss.new employee, tasks
+			bonus = project.done
+			salary = project.summarize base, bonus
 		end
 
-		boss.to_xml
+		salary.to_xml
 	end
 
 	def checkBehaviorOf(obj)
