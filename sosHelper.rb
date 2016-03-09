@@ -123,7 +123,8 @@ end
 
 o = SOSHelper::GetObservation.new
 c = o.filter({:procedure => "123"}).filter({:procedure => "344324"})
-p c
+# p c.condition.transform(c.condition)
+p c.condition.transform(SOSHelper::ObservationRequest.dup)
 
 # p o.uniform({ :procedure => "123"})
 

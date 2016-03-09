@@ -1,8 +1,7 @@
 class Factory < Hash
 	attr_reader :condition
 	def initialize(custom={}, boss=nil)
-		@condition = custom
-		# uniform @condition
+		@condition = uniform custom
 	end
 
 	def uniform(custom)
@@ -12,20 +11,21 @@ class Factory < Hash
 		end
 	end
 
-	def transform(obj=nil)
-		conditions = getConditionOf obj
-		conditions.each do |key, value|
-			tag = Nokogiri::XML::Node.new(key.to_s, @xml)
-			tag.content = parse value
-			@xml.root.add_child tag
+	# need fix to check
+	def transform(boss, obj=nil)
+		conditions = obj || condition
+		checkBehaviorOf(conditions).each do |key, value|
+			tag = Nokogiri::XML::Node.new(key.to_s, boss)
+			tag.content = value
+			boss.root.add_child tag
 		end
 
-		@xml.to_xml
+		boss.to_xml
 	end
 
-	def getConditionOf(obj)
-		return self.condition.dup if obj.respond_to? :condition
-		condition.dup
+	def checkBehaviorOf(obj)
+		return condition.dup if obj.respond_to? :condition
+		uniform(obj)
 	end
 
 	def merge! custom
