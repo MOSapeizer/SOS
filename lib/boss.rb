@@ -1,5 +1,6 @@
 module SOSHelper
 	class Boss
+
 		def initialize(key, value)
 			@employee = key
 			@tasks = value

@@ -1,6 +1,5 @@
 require_relative 'xmlRequest.rb'
 require_relative 'sosHelper.rb'
-require_relative 'offering'
 
 # Usage:
 # 	s = SOS.new("http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service")  => implement 3 core function
