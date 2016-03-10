@@ -20,7 +20,7 @@ Now Developing:
 
  	s.getObservations => not work yet
 
- 	If you want to custom GetObservation
+ 	If you want a custom GetObservation
 
  	go = SOSHelper::GetObservation.new
 
