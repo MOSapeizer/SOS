@@ -8,19 +8,4 @@
     xmlns:swes="http://www.opengis.net/swes/2.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="SOS" version="2.0.0" xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd">
     
-    <sos:offering>鳳義坑</sos:offering>
-    <!-- optional, multiple values possible -->
-    <sos:observedProperty>urn:ogc:def:phenomenon:OGC:1.0.30:rainfall_1day</sos:observedProperty>
-    <!-- optional -->
-    <sos:temporalFilter>
-        <fes:During>
-            <fes:ValueReference>phenomenonTime</fes:ValueReference>
-            <gml:TimePeriod gml:id="tp_1">
-                <gml:beginPosition>2016-03-07T19:20:00.000Z</gml:beginPosition>
-                <gml:endPosition>2016-03-09T04:00:00.000Z</gml:endPosition>
-            </gml:TimePeriod>
-        </fes:During>
-    </sos:temporalFilter>
-    
-    <sos:responseFormat>application/json</sos:responseFormat>
 </sos:GetObservation>

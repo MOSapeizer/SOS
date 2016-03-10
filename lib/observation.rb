@@ -9,7 +9,7 @@ module SOSHelper
 
 		def send(body=nil)
 			raise RuntimeError, 'Need to set request' if @request.nil?
-			body = condition.transform if body.nil?
+			body = condition.transform @xml if body.nil?
 			@request.post(body) { |res| next res }
 		end
 
@@ -18,7 +18,6 @@ module SOSHelper
 		def filter(custom={})
 			raise ArgumentError, 'Filters need to be hash' unless custom.is_a? Hash
 			return condition if custom == {}
-
 			condition.merge! custom
 			self
 		end

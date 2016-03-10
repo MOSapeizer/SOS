@@ -1,4 +1,4 @@
-require_relative 'xmlRequest.rb'
+require_relative 'lib/xmlRequest.rb'
 require_relative 'sosHelper.rb'
 
 # Usage:
@@ -53,4 +53,4 @@ end
 s = SOS.new("http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service")
 # p s.allowedValue
 
-p s.getObservations
+# p s.getObservations

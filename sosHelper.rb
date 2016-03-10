@@ -19,9 +19,7 @@ module SOSHelper
 
 end
 
-o = SOSHelper::GetObservation.new
-o.filter({:offering => "鳳義坑"}).filter({:observedProperty => "urn:ogc:def:phenomenon:OGC:1.0.30:rainfall_1day"})
-c = o.filter({:temporalFilter => :during })
-p c
-# p c.condition.transform(SOSHelper::ObservationRequest.dup)
-# p o.uniform({ :procedure => "123"})
+# o = SOSHelper::GetObservation.new
+# o.filter({:offering => "鳳義坑"}).filter({:observedProperty => "urn:ogc:def:phenomenon:OGC:1.0.30:rainfall_1day"})
+# c = o.filter({:temporalFilter => :during })
+# p c
