@@ -2,18 +2,16 @@ require_relative 'lib/xmlRequest.rb'
 require_relative 'sosHelper.rb'
 
 # Usage:
-# 	s = SOS.new("http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service")  => implement 3 core function
+# 	s = SOS.new("Url")
 # 	s.getCapabilities  => return All capabilities
-# 	s.getObservations(1 day)
+# 	s.getObservations(condition)
 #       => set the filter to get observations
+
+
 # 	s.offering =>  return all offerings from @capability
-#   s.observation.filter().fiter().filter
-# 	observation return self
-# 
 
 # 	url = "http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service"
 # 	s = SOS.new(url)
-# 	allowedValue = s.getCapabilities
 
 
 class SOS
@@ -49,8 +47,3 @@ class SOS
 	end
 	
 end
-
-s = SOS.new("http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service")
-# p s.allowedValue
-
-# p s.getObservations
