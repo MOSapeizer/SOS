@@ -20,7 +20,8 @@ class SOS
 		# request to http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service
 		@request = XmlRequest.new(url)
 		@capabilities = getCapabilities
-		@observations = nil
+		@observations, @gc, @go = nil
+
 	end
 
 	def allowedValue
@@ -36,10 +37,16 @@ class SOS
 		@gc.checkAllowedValues
 	end
 
-	def getObservations(condition={}, &block)
-		go = SOSHelper::GetObservation.new(request: @request)
-		go.filter(condition)
-		@observations = go.send(&block)
+	def getObservations(condition={})
+		@go = SOSHelper::GetObservation.new(request: @request).filter(condition)
+	end
+
+	def filter(condition={})
+		@go.filter condition
+	end
+
+	def send(&block)
+		@observations = @go.send(&block) if block_given?
 	end
 
 	def offering
