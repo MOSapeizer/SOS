@@ -1,13 +1,20 @@
 require_relative 'people.rb'
+require_relative 'offering.rb'
+require 'set'
 
+#   => '{:filter=>
+#   		{:During=>#<Set: {"1", "2", 
+#   			{:fuck=>#<Set: {"test"}>}}>}, 
+#   	 :offering=>#<Set: {"1", "2", "3", "4"}>}'
 class Complicated < People
 	def do(tasks)
-		tasks = tasks.to_a.map do |task|
-					assigns task if typeOf task, is: Hash
-					do task if typeOf task, is: Array
-					complete task if typeof task, is: String
+		result = plan(tasks).map do |task|
+					next assigns task if typeOf task, is: Hash
+					next self.do task if typeOf task, is: Array
+					next complete task if typeOf task, is: String
 				end
-		tasks.join " "
+
+		result.join " "
 		
 	end
 
@@ -15,12 +22,18 @@ class Complicated < People
 		tag task
 	end
 
+	def plan(task)
+		return task.to_a if typeOf task, is: Set
+		return task if typeOf task, is: Array
+		[task]
+	end
+
 	def assigns(task)
 		report = ""
 		task.each do |subordinate, subtask|
 			# problem: no key?
-			subordinate = eval( subordinate.to_s + ".new")
-			report += subordinate.do(subtask)
+			subordinate = eval( subordinate.to_s.capitalize + ".new")
+			report += subordinate.do plan(subtask)
 		end
 		report
 	end
@@ -36,3 +49,7 @@ class Complicated < People
 	end
 
 end
+
+c = Complicated.new()
+test = {offering: ["1"].to_set}
+c.do test
