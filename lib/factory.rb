@@ -26,20 +26,18 @@ class Factory < Hash
 		p custom
 	end
 
-	# need fix and check
+	# notify boss we have new tasks
+	# and send our base to him
 	def transform(base, obj=nil)
 		conditions = obj || condition
-		checkBehaviorOf(conditions).each do |employee, tasks|
-			p employee, tasks
-			project = SOSHelper::Boss.new(employee, tasks)
-			bonus = project.done # "<a><b>asdf</b></a>"
-			project.summarize base, bonus
-		end
+		projects = checkOf conditions 
+		jobs = Boss.new base, projects
+		achievements = jobs.assign
 
-		base.to_xml
+		achievements.to_xml
 	end
 
-	def checkBehaviorOf(obj)
+	def checkOf(obj)
 		return condition.dup if obj.respond_to? :condition
 		uniform(obj)
 	end

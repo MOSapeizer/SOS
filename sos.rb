@@ -55,6 +55,3 @@ class SOS
 	end
 	
 end
-
-s = SOS.new("http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service")
-s.getObservations
