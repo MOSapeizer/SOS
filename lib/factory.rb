@@ -1,16 +1,16 @@
 require_relative 'boss.rb'
+require 'set'
 
 
-# a = Factory.new
-# a.merge!({offering: "1"})
-# a.merge!({offering: "2"})
-# a.merge!({offering: "3"})
-# p a.merge!({offering: "4"})
+ # a = Factory.new
+ # a.merge!({offering: "1"})
+ # a.merge!({offering: "2"})
+ # a.merge!({offering: "3"})
+ # p a.merge!({offering: "4"})
 
-# p a.transform SOSHelper::ObservationRequest.dup
+ # p a.transform SOSHelper::ObservationRequest.dup
 
 class Factory < Hash
-	attr_reader :condition
 	def initialize(custom={})
 		@condition = uniform custom
 	end
@@ -23,7 +23,8 @@ class Factory < Hash
 			custom[k] = custom[k].to_set unless v.is_a? Set
 		end
 
-		p custom
+		p "extend filter with: " + custom.to_s
+		custom
 	end
 
 	# notify boss we have new tasks
@@ -50,6 +51,8 @@ class Factory < Hash
 	end
 
 	def to_s
-		@condition.to_s
+		@condition
 	end
-end
+
+	alias :condition :to_s
+end 

@@ -6,12 +6,9 @@ require_relative 'sosHelper.rb'
 # 	s.getCapabilities  => return All capabilities
 # 	s.getObservations(condition)
 #       => set the filter to get observations
-
-
 # 	s.offering =>  return all offerings from @capability
 
 # 	url = "http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service"
-# 	s = SOS.new(url)
 
 
 class SOS
@@ -39,11 +36,14 @@ class SOS
 
 	def getObservations(condition={})
 		@go = SOSHelper::GetObservation.new(request: @request)
-		filter condition
 	end
 
 	def filter(condition={})
 		@go.filter condition
+	end
+
+	def condition
+		@go.condition.to_s
 	end
 
 	def send(&block)

@@ -21,8 +21,9 @@ module SOSHelper
 		# filter({:condition => "value"}) =>  extend @condition
 		def filter(custom={})
 			raise ArgumentError, 'Filters need to be hash' unless custom.is_a? Hash
-			return condition if custom == {}
+			return condition.to_s if custom == {}
 			condition.merge! custom
+
 			self
 		end
 
