@@ -7,8 +7,11 @@ class People
 
 	end
 
-	def checkTypeOf(task, type)
-		return task.class
+	def typeOf(task, args={})
+		raise ArgumentError "Set check type" if args == {}
+		type = args[:is] || args[:is_not]
+		return task.class == type if not args[:is].nil?
+		return task.class != type if not args[:is_not].nil?
 	end
 
 	def inspect
@@ -16,8 +19,7 @@ class People
 	end
 
 	def inject(task)
-		return task if checkTypeOf task.class, String
-		nil
+		task if typeOf task, is: String
 	end
 
 	def tag(value=nil)

@@ -9,6 +9,19 @@ require_relative 'sosHelper.rb'
 # 	s.offering =>  return all offerings from @capability
 
 # 	url = "http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service"
+#   s  = SOS.new("YourService")
+#   s.getObservation
+#   s.filter({filter: { During: ["1"] }})
+#   s.filter({filter: { During: ["2", {fuck: "test"}] }})
+#   s.filter({offering: "1"})
+#   s.filter({offering: "2"})
+#   s.filter({offering: "3"})
+#   s.filter({offering: "4"})
+#   p s.condition
+#   => '{:filter=>
+#   		{:During=>#<Set: {"1", "2", 
+#   			{:fuck=>#<Set: {"test"}>}}>}, 
+#   	 :offering=>#<Set: {"1", "2", "3", "4"}>}'
 
 
 class SOS
@@ -36,6 +49,7 @@ class SOS
 
 	def getObservations(condition={})
 		@go = SOSHelper::GetObservation.new(request: @request)
+		filter condition unless condition == {}
 	end
 
 	def filter(condition={})

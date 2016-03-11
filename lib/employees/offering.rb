@@ -1,15 +1,19 @@
 require_relative 'simple.rb'
 
 class Offering < Simple
-	def namespace
-		"sos:"
-	end
+	
 end
 
 class Procedure < Simple
-	def namespace
-		"sos:"
-	end
+	
+end
+
+class ObseredProperty < Simple
+	
+end
+
+class FeatureOfInterest < Simple
+	
 end
 
 # a = Procedure.new()

@@ -3,10 +3,16 @@ require_relative 'people.rb'
 class Complicated < People
 	def do(tasks)
 		tasks = tasks.to_a.map do |task|
-			assigns task if checkTypeOf task, Hash
-		end
+					assigns task if typeOf task, is: Hash
+					do task if typeOf task, is: Array
+					complete task if typeof task, is: String
+				end
 		tasks.join " "
 		
+	end
+
+	def complete(task)
+		tag task
 	end
 
 	def assigns(task)
