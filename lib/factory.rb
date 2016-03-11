@@ -37,7 +37,7 @@ class Factory < Hash
 	def transform(base, obj=nil)
 		conditions = obj || condition
 		projects = checkOf conditions 
-		jobs = Boss.new base, projects
+		jobs = SOSHelper::Boss.new base, projects
 		achievements = jobs.assign
 
 		achievements.to_xml

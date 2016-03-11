@@ -1,5 +1,4 @@
 require_relative 'people.rb'
-require_relative 'offering.rb'
 require 'set'
 
 #   => '{:filter=>
@@ -49,7 +48,3 @@ class Complicated < People
 	end
 
 end
-
-c = Complicated.new()
-test = {offering: ["1"].to_set}
-c.do test

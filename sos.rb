@@ -14,14 +14,17 @@ require_relative 'sosHelper.rb'
 #   s.filter({filter: { During: ["1"] }})
 #   s.filter({filter: { During: ["2", {fuck: "test"}] }})
 #   s.filter({offering: "1"})
-#   s.filter({offering: "2"})
-#   s.filter({offering: "3"})
-#   s.filter({offering: "4"})
+#    .filter({offering: "2"})
+#    .filter({offering: "3"})
+#    .filter({offering: "4"})
 #   p s.condition
 #   => '{:filter=>
 #   		{:During=>#<Set: {"1", "2", 
 #   			{:fuck=>#<Set: {"test"}>}}>}, 
 #   	 :offering=>#<Set: {"1", "2", "3", "4"}>}'
+
+#   f = Factory.new()
+#   p f.transform(SOSHelper::ObservationRequest.dup, s.condition)
 
 
 class SOS
