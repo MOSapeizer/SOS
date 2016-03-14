@@ -26,9 +26,8 @@ class Factory < Hash
 			next (custom[k] = magic v) if v.is_a? Array
 			custom[k] = [v].to_set unless v.is_a? Array
 			custom[k] = custom[k].to_set unless v.is_a? Set
-		end
-		
-		p "extend filter with: " + custom.to_s
+		end		
+		# p "extend filter with: " + custom.to_s
 		custom
 	end
 
@@ -58,20 +57,57 @@ class Factory < Hash
 
 	def merge! custom
 		uniform custom
-		mergeTheHellOf(self.condition, custom)
+		# mergeTheHellOf(self.condition, custom)
+		mergeMagic(self.condition, custom)
 	end
 
-	def mergeTheHellOf(origin, custom)
-		origin.merge! (custom) do |key, origin, custom|
-			# p "----origin:",origin
-			# p "----custom:",custom
-			# p "----merge:", (origin.merge custom)
-			if origin.is_a? Hash
-				mergeTheHellOf origin, custom
-			else
-				origin.merge custom 
+	def mergeMagic(origin, custom)
+		if origin.respond_to? :merge!
+			origin.merge! (custom) do |key, origin, custom|
+				origin = [origin].to_set if not origin.is_a? Set
+				custom = [custom].to_set if not custom.is_a? Set
+				next mergeTheSmartWay origin, custom
+			end
+		else
+			origin + custom
+		end
+	end
+
+	def mergeTheSmartWay(origin, custom)
+		origin_hash, pure_origin_string = split origin
+		custom_hash, pure_custom_string = split custom
+		sum_hash = mergeHash origin_hash, custom_hash
+		summary = pure_origin_string + pure_custom_string + sum_hash.to_set
+	end
+
+	def mergeHash(origin, custom)
+		custom.each do |node|
+			mergeNodeInHash node, origin
+		end
+		origin
+	end
+
+	def mergeNodeInHash(node, origin)
+		flag = true
+		origin.each do |hash|
+			if hash.keys == node.keys
+				flag = false
+				next recursiveMerge(hash, node)
 			end
 		end
+		origin << node if flag
+	end
+
+	def recursiveMerge(origin, custom)
+		origin.merge! custom do |key, origin, custom|
+			mergeMagic origin, custom
+		end
+	end
+
+	def split(set)
+		hash = set.to_a.keep_if { |value| value.is_a? Hash  }
+		string = set - hash
+		return hash, string.to_set
 	end
 
 	def to_s

@@ -1,0 +1,3 @@
+class TemporalFilter < Complicated
+	
+end
