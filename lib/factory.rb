@@ -60,6 +60,7 @@ class Factory < Hash
 		uniform custom
 		dough = HashMerge.new(self.condition, custom)
 		dough.baked!
+		self
 	end
 
 	def to_s

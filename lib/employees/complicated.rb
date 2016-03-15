@@ -12,7 +12,6 @@ class Complicated < People
 					next self.do task if typeOf task, is: Array
 					next complete task if typeOf task, is: String
 				end
-
 		result.join " "
 		
 	end
