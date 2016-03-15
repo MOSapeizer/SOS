@@ -72,22 +72,3 @@ class SOS
 	end
 	
 end
-
-# ugly test
-
-# url = "http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service"
-# s  = SOS.new(url)
-# s.getObservations
-
-# s.filter({filter: { During: "1" }})
-# s.filter({filter: { valueReference: "1" }})
-# s.filter({filter: "1"})
-# s.filter({filter: "2"})
-# s.filter({filter: { During: "2" }})
-# s.filter({filter: { During: ["3"] }})
-# s.filter({filter: { During: "2" }})
-# s.filter({filter: { During: "2" }})
-# s.filter({filter: { valueReference: ["2"] }})
-# puts({a: [{b: "1"}]})
-# s.filter({offering: "1"}).filter({offering: "2"}).filter({offering: "3"}).filter({offering: "4"})
-# p s.condition
