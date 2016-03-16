@@ -8,7 +8,7 @@ class Procedure < Simple
 	
 end
 
-class ObseredProperty < Simple
+class ObservedProperty < Simple
 	
 end
 

@@ -1,5 +1,11 @@
 module SOSHelper
 
+	class Observation
+		def initialize(args)
+			
+		end
+	end
+
 	# GetObservation just focus on two things:
 	# 		filter conditions into hash
 	# 		send the conditions to specific @request
@@ -8,13 +14,18 @@ module SOSHelper
 		def initialize(args={})
 			@request = args[:request]
 			@xml = ObservationRequest.dup
+			@request_body = nil
 		end
 
 		# Without preset Conditions is Okay
-		def send(body=nil)
+		def send(body=nil, &block)
 			raise RuntimeError, 'Need to set request' if @request.nil?
 			body = condition.transform @xml if body.nil?
-			@request.post(body) { |res| next res }
+			@request.post(body, &block) if block_given?
+		end
+
+		def body(body=nil)
+			condition.transform @xml if body.nil?
 		end
 
 		# filter() =>  no argument to return @condtion

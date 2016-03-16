@@ -13,7 +13,6 @@ class Complicated < People
 					next complete task if typeOf task, is: String
 				end
 		result.join " "
-		
 	end
 
 	def complete(task)
@@ -30,20 +29,14 @@ class Complicated < People
 		report = ""
 		task.each do |subordinate, subtask|
 			# problem: no key?
-			subordinate = eval( subordinate.to_s.capitalize + ".new")
+			subordinate = eval( capitalize(subordinate.to_s) + ".new")
 			report += subordinate.do plan(subtask)
 		end
 		report
 	end
 
 	def tag(value=nil, attrs={})
-		"<#{self.class} #{attributes attrs}#>#{value.to_s}</#{self.class}>"
-	end
-
-	def attributes(attrs)
-		attributes_all = ""
-		attrs.each { |k, v| attributes_all += k.to_s + "=" + v.to_s + " " }
-		attributes_all
+		"<#{namespace}#{tag_name}#{attributes attrs}#>#{value.to_s}</#{namespace}#{tag_name}>"
 	end
 
 end

@@ -53,6 +53,7 @@ class SOS
 	def getObservations(condition={})
 		@go = SOSHelper::GetObservation.new(request: @request)
 		filter condition unless condition == {}
+		@go
 	end
 
 	def filter(condition={})

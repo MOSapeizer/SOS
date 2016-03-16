@@ -1,4 +1,4 @@
-require_relative 'employees/offering.rb'
+require_relative 'company.rb'
 
 module SOSHelper
 
@@ -44,7 +44,14 @@ module SOSHelper
 		end
 
 		def recognize_employee
-			eval( @employee.to_s.capitalize + ".new")
+			employee = capitalize @employee
+			eval( employee + ".new")
+		end
+
+		def capitalize(employee)
+			employee = employee.to_s
+			employee[0] = employee[0].capitalize
+			employee
 		end
 
 		def assign_tasks_to(you)
