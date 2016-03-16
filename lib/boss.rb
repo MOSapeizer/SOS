@@ -34,7 +34,7 @@ module SOSHelper
 	class ProjectManager
 		def initialize(key, value)
 			@employee = key
-			@tasks = value.to_a
+			@tasks = check value
 			@results = nil
 		end
 
@@ -52,6 +52,11 @@ module SOSHelper
 			employee = employee.to_s
 			employee[0] = employee[0].capitalize
 			employee
+		end
+
+		def check(value)
+			return value.to_a if value.is_a? Set
+			value
 		end
 
 		def assign_tasks_to(you)
