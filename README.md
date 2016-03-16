@@ -3,38 +3,50 @@
 This is a implementation Of Sensor Observation Service
 You can just send Get Capability Request to Specific Url
 
-GetObservation is developing, suggest to not use it.
+## Supporting Functionality
 
-Example:
+- [x] GetCapibility
+- [ ] DescribeSensor (developing)
+- [x] GetObservation (parts)
 
- 	s = SOS.new("http://your/web/service")
-  	s.getCapabilities  => return All capabilities
+## Tutorial
 
-  	and you can check Allowed Value
+### GetCapibility Example:
 
-  	s.allowedValue
+	```ruby
+ 	service = SOS.new("http://your/sos/web/service")
+  	service.getCapabilities 
+
+	p service.allowedValue
+
+  	service.allowedValue
  	s.offering =>  return all offerings from @capability
+ 	```
+### Check Allowed Value
+
+	
+	```ruby 
+	list = service.allowedValue
+
+	list.keys
+	
+	# [ :offering, 
+	#  	:observedProperty, 
+	#  	:featureOfInterest, 
+	#  	:procedure, 
+	#  	:spatialFilter, 
+	#  	:temporalFilter, 
+	#  	:responseFormat ]
+
+	list[:offering] # list all offerings of the SOS service 
+
+	```
+
+### GetObservation
+
+	
 
 
-Now Developing:
+## Contact A Human
 
- 	s.getObservations => not work yet
-
- 	If you want a custom GetObservation
-
- 	go = SOSHelper::GetObservation.new
-
-    go.filter({offering: "name"})
-	go.filter({procedure: "sensor"})
-	go.filter({responseFromate: "application/json"})
-
- 	there is another way:
-
- 	go.filter({offering: "name"})
- 	  .filter({procedure: "sensor"})
- 	  .filter({responseFromate: "application/json"})
-   
-
-Send me email if you have suggestions
-
-k471352@gmail.com
+Zil k471352@gmail.com
