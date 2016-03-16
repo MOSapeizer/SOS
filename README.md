@@ -13,34 +13,35 @@ You can just send Get Capability Request to Specific Url
 
 ### GetCapibility Example:
 
-	```ruby
- 	service = SOS.new("http://your/sos/web/service")
-  	service.getCapabilities 
+```ruby
+service = SOS.new("http://your/sos/web/service")
+service.getCapabilities 
 
-	p service.allowedValue
+p service.allowedValue
 
-  	service.allowedValue
- 	s.offering =>  return all offerings from @capability
- 	```
+service.allowedValue
+s.offering =>  return all offerings from @capability
+```
+
 ### Check Allowed Value
 
 	
-	```ruby 
-	list = service.allowedValue
+```ruby 
+list = service.allowedValue
 
-	list.keys
+list.keys
 	
-	# [ :offering, 
-	#  	:observedProperty, 
-	#  	:featureOfInterest, 
-	#  	:procedure, 
-	#  	:spatialFilter, 
-	#  	:temporalFilter, 
-	#  	:responseFormat ]
+# [ :offering, 
+#  	:observedProperty, 
+#  	:featureOfInterest, 
+#  	:procedure, 
+#  	:spatialFilter, 
+#  	:temporalFilter, 
+#  	:responseFormat ]
 
-	list[:offering] # list all offerings of the SOS service 
+list[:offering] # list all offerings of the SOS service 
 
-	```
+```
 
 ### GetObservation
 
