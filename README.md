@@ -38,14 +38,70 @@ list.keys
 #  	:spatialFilter, 
 #  	:temporalFilter, 
 #  	:responseFormat ]
+```
+
+The list is pure Hash, simply use it like
+
+
+```ruby 
 
 list[:offering] # list all offerings of the SOS service 
+
+list[:responseFormat][0] # return a string
 
 ```
 
 ### GetObservation
 
-	
+```ruby 
+service.getObservation
+
+service.filter({  offering: "name",
+				  observedProperty: "properties",
+				  temporalFilter: {
+ 					 during: {
+ 					 	valueReference: "phenomenonTime",
+ 					 	timeperiod: "A range"
+					 }
+				  }
+			    })
+
+service.send { |response| File.new("./response/tmp", "w").write response }
+```	
+
+### filter
+
+simple tag with value
+
+```ruby
+service.filter({  offering: "name" }) # <sos:offering>name</sos:offering>
+
+```
+
+concate together
+
+```ruby
+service.filter({  offering: "name" })
+	   .filter({  offering: "b" })
+	   .filter({  offering: "c" })
+       .filter({  offering: "d" })
+
+# <sos:offering>name</sos:offering>
+# <sos:offering>b</sos:offering>
+# <sos:offering>c</sos:offering>
+# <sos:offering>d</sos:offering>
+
+```
+
+complicate example
+
+```ruby
+service.filter({ offering: "offering", 
+				 observedProperty: "observedProperty",
+				 responseFormat: list[:responseFormat][0]})
+
+```
+
 
 
 ## Contact A Human
