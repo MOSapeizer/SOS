@@ -1,4 +1,4 @@
-class PropertyIsBetween < Complicated
+class Intersects < Complicated
 
 	def tag_name
 		class_name

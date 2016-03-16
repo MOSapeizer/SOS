@@ -1,5 +1,4 @@
-class LowerBoundary < Complicated
-
+class BegunBy < Complicated
 	def tag_name
 		class_name
 	end

@@ -1,3 +1,4 @@
-Dir[ File.dirname(__FILE__) + "/employees/*.rb"].each {|file| require file }
-Dir[ File.dirname(__FILE__) + "/employees/fes/*.rb"].each {|file| require file }
-Dir[ File.dirname(__FILE__) + "/employees/gml/*.rb"].each {|file| require file }
+require_relative 'employees/man.rb'
+require_relative 'employees/fes.rb'
+require_relative 'employees/gml.rb'
+require_relative 'employees/sos.rb'

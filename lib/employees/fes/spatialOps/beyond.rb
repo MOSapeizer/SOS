@@ -1,4 +1,4 @@
-class UpperBoundary < Complicated
+class Beyond < Complicated
 
 	def tag_name
 		class_name

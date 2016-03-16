@@ -1,5 +1,3 @@
-require_relative 'simple.rb'
-
 class Offering < Simple
 	
 end
