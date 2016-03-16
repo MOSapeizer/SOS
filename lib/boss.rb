@@ -19,8 +19,9 @@ module SOSHelper
 			@projects.each do |employee, task|
 				pm = ProjectManager.new(employee, task)
 				results = pm.done
-				summarize @base, results
+				summarize @base, results.dup
 			end
+			# p @base.to_xml
 
 			@base
 		end

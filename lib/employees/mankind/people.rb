@@ -1,6 +1,7 @@
 class People
 	def initialize(tasks=nil)
 		@tasks = tasks.to_a
+		@attributes = ""
 	end
 
 	def do(tasks)
@@ -23,7 +24,7 @@ class People
 	end
 
 	def tag(value=nil)
-		"<#{namespace}#{tag_name}>#{value.to_s}</#{namespace}#{tag_name}>"
+		"<#{namespace}#{tag_name}>#{value.to_s}</#{namespace}#{tag_name}> "
 	end
 
 	def tag_name
@@ -43,9 +44,7 @@ class People
 	end
 
 	def attributes(attrs)
-		attributes = ""
-		attrs.each { |k, v| attributes += " #{namespace}" + k.to_s + "=" + v.to_s }
-		attributes
+		attrs.each { |k, v| @attributes += " #{namespace}" + k.to_s + "=\"" + v.to_a[0] + "\"" }
 	end
 
 	def class_name

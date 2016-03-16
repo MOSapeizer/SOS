@@ -61,9 +61,10 @@ service.filter({  offering: "name",
 				  temporalFilter: {
  					 during: {
  					 	valueReference: "phenomenonTime",
- 					 	timeperiod: "A range"
+ 					 	timePeriod: "2016-03-07T19:20:00.000Z 2016-03-09T04:00:00.000Z"
 					 }
-				  }
+				  },
+				  responseFormat: "application/json"
 			    })
 
 service.send { |response| File.new("./response/tmp", "w").write response }

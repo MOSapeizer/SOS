@@ -15,17 +15,18 @@ module SOSHelper
 			@request = args[:request]
 			@xml = ObservationRequest.dup
 			@request_body = nil
+			@body = ""
 		end
 
 		# Without preset Conditions is Okay
 		def send(body=nil, &block)
 			raise RuntimeError, 'Need to set request' if @request.nil?
-			body = condition.transform @xml if body.nil?
-			@request.post(body, &block) if block_given?
+			@body = condition.transform @xml if body.nil?
+			@request.post(@body, &block) if block_given?
 		end
 
 		def body(body=nil)
-			condition.transform @xml if body.nil?
+			@body = body
 		end
 
 		# filter() =>  no argument to return @condtion

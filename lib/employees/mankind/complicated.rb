@@ -7,17 +7,26 @@ require 'set'
 #   	 :offering=>#<Set: {"1", "2", "3", "4"}>}'
 class Complicated < People
 	def do(tasks)
-		# p tasks
 		result = plan(tasks).map do |task|
-					next assigns task if typeOf task, is: Hash
+				 	if typeOf task, is: Hash
+				 		checkAttributesIn task
+						next assigns task
+					end
 					next self.do task if typeOf task, is: Array
 					next task if typeOf task, is: String
 				 end
 		report result
 	end
 
+	def checkAttributesIn(task)
+		unless task[:attributes].nil?
+ 			attributes task[:attributes] 
+ 			task.delete :attributes
+ 		end
+	end
+
 	def report(result)
-		result.map { |task| self.tag task }.join " "
+		result.map { |task| tag task }.join " "
 	end
 
 	def plan(task)
@@ -29,7 +38,6 @@ class Complicated < People
 	def assigns(task)
 		report = ""
 		task.each do |subordinate, subtask|
-			# problem: no key?
 			subordinate = eval( capitalize(subordinate.to_s) + ".new")
 			report += subordinate.do plan(subtask)
 		end
@@ -37,7 +45,11 @@ class Complicated < People
 	end
 
 	def tag(value=nil, attrs={})
-		"<#{namespace}#{tag_name}#{attributes attrs}>#{value.to_s}</#{namespace}#{tag_name}>"
+		"<#{namespace}#{tag_name}#{@attributes}> #{custom value}</#{namespace}#{tag_name}> "
+	end
+
+	def custom(value)
+		value.to_s
 	end
 
 end

@@ -22,7 +22,7 @@ class XmlRequest
 		@post = Net::HTTP::Post.new(uri.path)
 		@post["Content-type"] = "application/xml"
 		@post.body = body
-
+		File.new("./response/send", "w").write body
 		@res = send @post
 		@result = yield @res.body if block_given?
 	end
