@@ -32,6 +32,7 @@ class XmlRequest
 		fullPath = path_combine query
 		@get = Net::HTTP::Get.new(fullPath)
 		@res = send @get
+		File.new("tmp_get", "w").write @res
 		@result = yield @res.body if block_given?
 	end
 
