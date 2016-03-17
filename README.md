@@ -66,7 +66,10 @@ request.filter({  offering: "name",
 				  temporalFilter: {
  					 during: {
  					 	valueReference: "phenomenonTime",
- 					 	timePeriod: "2016-03-07T19:20:00.000Z 2016-03-09T04:00:00.000Z"
+ 					 	timePeriod: {
+ 					 		attribues: { id: "tp_1" },
+ 					 		range: "2016-03-07T19:20:00.000Z 2016-03-09T04:00:00.000Z"
+ 					 	}
 					 }
 				  },
 				  responseFormat: "application/json"
@@ -93,14 +96,14 @@ observations = request.send { |response| File.new("./response/tmp", "w").write r
 simple tag with value
 
 ```ruby
-request.filter({  offering: "name" }) # <sos:offering>name</sos:offering>
+service.filter({  offering: "name" }) # <sos:offering>name</sos:offering>
 
 ```
 
 concate together
 
 ```ruby
-request.filter({  offering: "name" })
+service.filter({  offering: "name" })
 	   .filter({  offering: "b" })
 	   .filter({  offering: "c" })
        .filter({  offering: "d" })
@@ -115,10 +118,9 @@ request.filter({  offering: "name" })
 complicate example
 
 ```ruby
-request.filter({ offering: "offering", 
+service.filter({ offering: "offering", 
 				 observedProperty: "observedProperty",
 				 responseFormat: list[:responseFormat][0]})
-
 
 ```
 
