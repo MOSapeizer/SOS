@@ -47,16 +47,16 @@ module SOSHelper
 			@condition ||= Factory.new()
 		end
 
-		def offering(list)
-			filter({offering: list})
+		def offering(text)
+			filter({offering: text})
 		end
 
-		def procedure(list)
-			filter({procedure: list})
+		def procedure(text)
+			filter({procedure: text})
 		end
 
-		def observedProperty(list)
-			filter({observedProperty: list})
+		def observedProperty(text)
+			filter({observedProperty: text})
 		end
 
 		def temporalFilter(id, range)
@@ -66,6 +66,10 @@ module SOSHelper
 				 			timePeriod: { attributes: { id: id }, range: range } }
 					  	}
 		  			})
+		end
+
+		def responseFormat(text)
+			filter({responseFormat: text})
 		end
 
 	end
