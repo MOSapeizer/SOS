@@ -55,19 +55,7 @@ class SOS
 		filter condition unless condition == {}
 		@go
 	end
-
-	def filter(condition={})
-		@go.filter condition
-	end
-
-	def condition
-		@go.condition.to_s
-	end
-
-	def send(&block)
-		@observations = @go.send(&block) if block_given?
-	end
-
+	
 	def offering
 		@offerings = @offerings || @capabilities.xpath("//sos:Contents//swes:offering").map { |node| Offering.new(node) } unless @capabilities.nil?
 	end
