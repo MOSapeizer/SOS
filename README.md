@@ -9,6 +9,10 @@ You can just send Get Capability Request to Specific Url
 - [ ] DescribeSensor (developing)
 - [x] GetObservation (parts)
 
+## How to Install
+
+	gem install sos-core
+
 ## Tutorial
 
 ### GetCapibility Example:
