@@ -66,7 +66,10 @@ request.filter({  offering: "name",
 				  temporalFilter: {
  					 during: {
  					 	valueReference: "phenomenonTime",
- 					 	timePeriod: "2016-03-07T19:20:00.000Z 2016-03-09T04:00:00.000Z"
+ 					 	timePeriod: {
+ 					 		attribues: { id: "tp_1" },
+ 					 		range: "2016-03-07T19:20:00.000Z 2016-03-09T04:00:00.000Z"
+ 					 	}
 					 }
 				  },
 				  responseFormat: "application/json"
