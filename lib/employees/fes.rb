@@ -1,3 +1,4 @@
+require_relative 'man.rb'
 Dir[ File.dirname(__FILE__) + "/fes/expression/*.rb"].each {|file| require file }
 Dir[ File.dirname(__FILE__) + "/fes/comparisonOps/*.rb"].each {|file| require file }
 Dir[ File.dirname(__FILE__) + "/fes/extensionOps/*.rb"].each {|file| require file }

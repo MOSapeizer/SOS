@@ -1,5 +1,3 @@
-require_relative 'company.rb'
-
 module SOSHelper
 
 	# Boss Assign the tasks
@@ -21,7 +19,6 @@ module SOSHelper
 				results = pm.done
 				summarize @base, results.dup
 			end
-			# p @base.to_xml
 
 			@base
 		end
@@ -45,8 +42,7 @@ module SOSHelper
 		end
 
 		def recognize_employee
-			employee = capitalize @employee
-			eval( employee + ".new")
+			Object.const_get(capitalize @employee).new
 		end
 
 		def capitalize(employee)

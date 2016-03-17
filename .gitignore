@@ -2,3 +2,4 @@ tmp/*
 response/*
 js/*
 main.rb
+sos-core.gemspec

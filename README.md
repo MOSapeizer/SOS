@@ -89,14 +89,14 @@ observations = request.send { |response| File.new("./response/tmp", "w").write r
 simple tag with value
 
 ```ruby
-service.filter({  offering: "name" }) # <sos:offering>name</sos:offering>
+request.filter({  offering: "name" }) # <sos:offering>name</sos:offering>
 
 ```
 
 concate together
 
 ```ruby
-service.filter({  offering: "name" })
+request.filter({  offering: "name" })
 	   .filter({  offering: "b" })
 	   .filter({  offering: "c" })
        .filter({  offering: "d" })
@@ -111,9 +111,10 @@ service.filter({  offering: "name" })
 complicate example
 
 ```ruby
-service.filter({ offering: "offering", 
+request.filter({ offering: "offering", 
 				 observedProperty: "observedProperty",
 				 responseFormat: list[:responseFormat][0]})
+
 
 ```
 

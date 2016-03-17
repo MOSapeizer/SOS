@@ -1,4 +1,3 @@
-require_relative 'boss.rb'
 require_relative 'hashMerge.rb'
 require 'set'
 
