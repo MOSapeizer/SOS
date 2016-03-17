@@ -16,6 +16,6 @@ module SOSHelper
 		 "procedure", "spatialFilter", 
 		 "temporalFilter", "responseFormat"].freeze
 
-	ObservationRequest = File.open('./lib/sos_helper/getObservation.xml') { |f| Nokogiri::XML(f)  }.freeze
+	ObservationRequest = File.open(File.dirname(__FILE__) + '/sos_helper/getObservation.xml') { |f| Nokogiri::XML(f)  }.freeze
 
 end
