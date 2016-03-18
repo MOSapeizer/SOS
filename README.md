@@ -3,6 +3,11 @@
 This is a implementation Of Sensor Observation Service
 You can just send Get Capability Request to Specific Url
 
+## Support Version
+
+- [ ] SOS 1.0.0
+- [x] SOS 2.0.0
+
 ## Supporting Functionality
 
 - [x] GetCapibility
