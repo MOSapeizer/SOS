@@ -1,5 +1,13 @@
 require 'time'
 
+
+class Time
+	def toTimeZone(time=nil)
+		return time.utc.iso8601 unless time.nil?
+		self.utc.iso8601
+	end
+end
+
 class GMLTime < Time
 	def initialize(time)
 		@time = toDateTime time
@@ -8,7 +16,7 @@ class GMLTime < Time
 
 	def toTimeZone(time=nil)
 		return time.utc.iso8601 unless time.nil?
-		@time ||= @time.utc.iso8601
+		@time.utc.iso8601
 	end
 
 	def toDateTime(time=nil)

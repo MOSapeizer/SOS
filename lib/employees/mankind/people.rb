@@ -1,5 +1,6 @@
 class People
 	def initialize()
+		@attributes = ""
 	end
 
 	def do(tasks)
@@ -42,6 +43,7 @@ class People
 	end
 
 	def attributes(attrs)
+		p attrs
 		attrs.each { |k, v| @attributes += " #{namespace}" + k.to_s + "=\"" + v.to_a[0] + "\"" }
 	end
 

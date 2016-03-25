@@ -3,7 +3,6 @@ require_relative '../gml/gmlTime.rb'
 class SOSTime
 	def initialize(time)
 		@time = checkTimeType time
-
 	end
 
 	def timeInstant(time)
@@ -12,6 +11,10 @@ class SOSTime
 
 	def timePeriod(time)
 		time.xpath(".//gml:TimePeriod")
+	end
+
+	def range(beginTime=beginPosition, endTime=endPosition)
+		beginTime.toTimeZone + " " + endTime.toTimeZone
 	end
 
 	def timePosition

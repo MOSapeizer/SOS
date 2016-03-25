@@ -15,6 +15,7 @@ module SOSHelper
 			@request = args[:request]
 			@xml = ObservationRequest.dup
 			@request_body = nil
+			@tp = []
 			@body = ""
 		end
 
@@ -59,7 +60,18 @@ module SOSHelper
 			filter({observedProperty: list})
 		end
 
-		def temporalFilter=(id, range)
+		def randomID
+			tp = "tp_" + rand(100000000).to_s
+			p tp
+			(unique? tp) ? tp : randomID
+		end
+
+		def unique?(tp)
+			not @tp.include? tp
+		end
+
+		def temporalFilter=(id=randomID, range)
+			@tp << randomID
 			filter({ temporalFilter: {
 						during: {
 				 			valueReference: "phenomenonTime",
