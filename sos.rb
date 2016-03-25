@@ -10,29 +10,14 @@ require_relative 'sosHelper.rb'
 
 # 	url = "http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service"
 #   s  = SOS.new("YourService")
-#   s.getObservations
-#   s.filter({filter: { During: ["1"] }})
-#   s.filter({filter: { During: ["2", {fuck: "test"}] }})
-#   s.filter({offering: "1"})
-#    .filter({offering: "2"})
-#    .filter({offering: "3"})
-#    .filter({offering: "4"})
-#   p s.condition
-#   => '{:filter=>
-#   		{:During=>#<Set: {"1", "2", 
-#   			{:fuck=>#<Set: {"test"}>}}>}, 
-#   	 :offering=>#<Set: {"1", "2", "3", "4"}>}'
-
-#   f = Factory.new()
-#   p f.transform(SOSHelper::ObservationRequest.dup, s.condition)
-
 
 class SOS
 
+	attr_reader :capabilities
 	def initialize(url, args={})
 		# request to http://cgis.csrsr.ncu.edu.tw:8080/swcb-sos-new/service
 		@request = XmlRequest.new(url)
-		@capabilities = getCapabilities
+		@capabilities = nil
 		@observations, @gc, @go = nil
 
 	end
@@ -43,7 +28,8 @@ class SOS
 	
 	def getCapabilities(query={})
 		@gc = SOSHelper::GetCapability.new(request: @request)
-		@capabilities = @gc.send
+		@gc.send
+		@capabilities = @gc.capabilities
 	end
 
 	def checkAllowedValues
@@ -56,8 +42,8 @@ class SOS
 		@go
 	end
 	
-	def offering
-		@offerings = @offerings || @capabilities.xpath("//sos:Contents//swes:offering").map { |node| Offering.new(node) } unless @capabilities.nil?
+	def offerings
+		@offerings ||= @capabilities.contents.offering
 	end
 	
 end

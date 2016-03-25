@@ -8,12 +8,14 @@ module SWES
 			@offering = offering
 			@keys = [ :identifier,
 					  :procedure,
-					  :procedureDescription,
+					  :procedureDescriptionFormats,
 					  :observableProperty,
+					  :phenomenonTime,
+					  :resultTime,
 					  :responseFormat ]
 		end
 
-		def id
+		def identifier
 			@identifier ||= find("swes:identifier")
 		end
 
@@ -55,6 +57,11 @@ module SWES
 
 		def findAll(tag)
 			@offering.xpath(".//" + tag).map { |tag| tag.text }
+		end
+
+		def inspect
+			id = identifier.ascii_only? ? identifier : "UTF-16"
+			"Offering: @id='#{id}'"
 		end
 
 		def self.name

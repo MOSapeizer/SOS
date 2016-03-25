@@ -3,10 +3,11 @@ require_relative '../gml/gmlTime.rb'
 class SOSTime
 	def initialize(time)
 		@time = checkTimeType time
+
 	end
 
 	def timeInstant(time)
-		time.xpath(".//gml:TimeInstant") 
+		time.xpath(".//gml:TimeInstant")
 	end
 
 	def timePeriod(time)
@@ -14,15 +15,20 @@ class SOSTime
 	end
 
 	def timePosition
-		@instant ||= GMLTime.new find("gml:timePosition")
+		@instant ||= gmlTime find("gml:timePosition")
 	end
 
 	def beginPosition
-		@begin ||= GMLTime.new find("gml:beginPosition")
+		@begin ||= gmlTime find("gml:beginPosition")
 	end
 
 	def endPosition
-		@end ||= GMLTime.new find("gml:endPosition")
+		
+		@end ||= gmlTime find("gml:endPosition")
+	end
+
+	def gmlTime(time)
+		GMLTime.new time unless time.empty?
 	end
 
 	def find(tag)
@@ -33,10 +39,15 @@ class SOSTime
 		type = timeInstant time
 		type = timePeriod time if type.empty?
 	end
+
+	def inspect
+		time = timePosition.nil? ? "@begin: #{beginPosition}, @end: #{endPosition}" : "@intant: #{@instant}"
+		"PhenomenonTime: #{time}"
+	end
 end
 
 class PhenomenonTime < SOSTime
-
+	
 end
 
 class ResultTime < SOSTime

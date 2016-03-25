@@ -21,12 +21,10 @@ module SOSHelper
 		end
 
 	end
-	xml = File.open('/Users/zil/Documents/task/SOS/response/tmp_GetCapability') { |f| Nokogiri::XML(f)  }
-
-	p Capability.new(root: xml).contents.offering[1].phenomenonTime.beginPosition
 
 	class GetCapability
 
+		attr_reader :capabilities
 		def initialize(args={})
 			@request = args[:request]
 			@url = args[:url]
@@ -39,7 +37,9 @@ module SOSHelper
 			query[:service] = query[:service] || "SOS"
 			query[:request] = query[:request] || "GetCapabilities"
 			query[:version] = query[:version] || "2.0.0"
-			@capabilities = request.get(query) { |str| next Nokogiri::XML(str) }
+			@capabilities = request.get(query) do |str| xml = Nokogiri::XML(str) 
+													Capability.new(root: xml)
+											   end
 
 		end
 
