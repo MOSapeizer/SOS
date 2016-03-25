@@ -1,7 +1,5 @@
 class People
-	def initialize(tasks=nil)
-		@tasks = tasks.to_a
-		@attributes = ""
+	def initialize()
 	end
 
 	def do(tasks)
@@ -16,7 +14,7 @@ class People
 	end
 
 	def inspect
-		tag
+		self.to_s
 	end
 
 	def inject(task)

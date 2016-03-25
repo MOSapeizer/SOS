@@ -1,3 +1,5 @@
+require_relative '../mankind/simple.rb'
+
 class Offering < Simple
 	
 end

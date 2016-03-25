@@ -1,4 +1,30 @@
+require 'nokogiri'
+require_relative 'employees/sos/contents.rb'
+
 module SOSHelper
+	class Capability
+		def initialize(args={})
+			@root = args[:root].dup
+		end
+
+		def contents
+			contents = @root.xpath("//sos:Contents")
+			Contents.new(contents)
+		end
+
+		def filterCapabilities
+			
+		end
+
+		def extension
+			
+		end
+
+	end
+	xml = File.open('/Users/zil/Documents/task/SOS/response/tmp_GetCapability') { |f| Nokogiri::XML(f)  }
+
+	p Capability.new(root: xml).contents.offering[1].phenomenonTime.beginPosition
+
 	class GetCapability
 
 		def initialize(args={})
@@ -12,7 +38,9 @@ module SOSHelper
 		def send(query={})
 			query[:service] = query[:service] || "SOS"
 			query[:request] = query[:request] || "GetCapabilities"
+			query[:version] = query[:version] || "2.0.0"
 			@capabilities = request.get(query) { |str| next Nokogiri::XML(str) }
+
 		end
 
 		def checkAllowedValues(capabilities=nil)

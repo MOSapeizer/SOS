@@ -22,7 +22,7 @@ class XmlRequest
 		@post = Net::HTTP::Post.new(uri.path)
 		@post["Content-type"] = "application/xml"
 		@post.body = body
-		File.new("./response/send", "w").write body
+		File.new("./response/send_post", "w").write body
 		@res = send @post
 		@result = yield @res.body if block_given?
 	end
@@ -31,6 +31,7 @@ class XmlRequest
 		fullPath = path_combine query
 		@get = Net::HTTP::Get.new(fullPath)
 		@res = send @get
+		File.new("./response/tmp_GetCapability", "w").write @res.body
 		@result = yield @res.body if block_given?
 	end
 
