@@ -22,18 +22,10 @@ class SOS
 
 	end
 
-	def allowedValue
-		@allowedValue ||= checkAllowedValues
-	end
-	
 	def getCapabilities(query={})
 		@gc = SOSHelper::GetCapability.new(request: @request)
 		@gc.send
 		@capabilities = @gc.capabilities
-	end
-
-	def checkAllowedValues
-		@gc.checkAllowedValues
 	end
 
 	def getObservations(condition={})

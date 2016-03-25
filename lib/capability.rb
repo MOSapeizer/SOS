@@ -29,7 +29,6 @@ module SOSHelper
 			@request = args[:request]
 			@url = args[:url]
 			@query = {}
-			@allowedValue = {}
 			@capabilities = nil
 		end
 
@@ -40,12 +39,6 @@ module SOSHelper
 			@capabilities = request.get(query) do |str| xml = Nokogiri::XML(str) 
 													Capability.new(root: xml)
 											   end
-
-		end
-
-		def checkAllowedValues(capabilities=nil)
-
-			@allowedValue = check Relics
 		end
 
 		private
