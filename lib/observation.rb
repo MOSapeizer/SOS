@@ -47,19 +47,19 @@ module SOSHelper
 			@condition ||= Factory.new()
 		end
 
-		def offering(list)
+		def offering=(list)
 			filter({offering: list})
 		end
 
-		def procedure(list)
+		def procedure=(list)
 			filter({procedure: list})
 		end
 
-		def observedProperty(list)
+		def observedProperty=(list)
 			filter({observedProperty: list})
 		end
 
-		def temporalFilter(id, range)
+		def temporalFilter=(id, range)
 			filter({ temporalFilter: {
 						during: {
 				 			valueReference: "phenomenonTime",

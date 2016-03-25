@@ -58,7 +58,7 @@ list[:responseFormat][0] # return a string
 ### GetObservation
 
 ```ruby 
-request = service.getObservation
+request = service.getObservations
 
 #set condition like a hardcode gamer
 request.filter({  offering: "name",
@@ -84,9 +84,9 @@ the easier way
 request = service.getObservation
 
 #set condition
-request.offering "鳳義坑"
-request.observedProperty "urn:ogc:def:phenomenon:OGC:1.0.30:rainfall_1day"
-request.temporalFilter "tp_1", "2016-03-07T19:20:00.000Z 2016-03-09T04:00:00.000Z"
+request.offering = "鳳義坑"
+request.observedProperty = "urn:ogc:def:phenomenon:OGC:1.0.30:rainfall_1day"
+request.temporalFilter = "tp_1", "2016-03-07T19:20:00.000Z 2016-03-09T04:00:00.000Z"
 
 observations = request.send { |response| File.new("./response/tmp", "w").write response }
 ```	
