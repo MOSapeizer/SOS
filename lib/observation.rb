@@ -62,7 +62,6 @@ module SOSHelper
 
 		def randomID
 			tp = "tp_" + rand(100000000).to_s
-			p tp
 			(unique? tp) ? tp : randomID
 		end
 
